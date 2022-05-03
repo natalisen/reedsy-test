@@ -9,9 +9,8 @@ class Order < ApplicationRecord
   def set_total!
     self.total = 0
     placements.each do |placement|
-      discount = placement.item.item_discount(placement.quantity)
-
       sum = placement.item.price * placement.quantity
+      discount = placement.item.item_discount(placement.quantity)
       sum = sum.to_f - percent_of(sum, discount) unless discount.zero?
 
       self.total += sum

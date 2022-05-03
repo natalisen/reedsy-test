@@ -3,16 +3,16 @@ module Discount
 
   included do
     def tshirt_discount(count)
-      if count >= 3
-        discount = 30
-      end
+      discount = count >= 3 ? 30 : 0
     end
 
     def mug_discount(count)
-      if count < 150
-        discount = count.digits.last * 2
+      if count.digits.length == 1
+        0
+      elsif count < 150
+        count.digits.last * 2 
       else
-        discount = 30
+        30 
       end
     end
   end
